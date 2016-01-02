@@ -100,25 +100,31 @@
 EPOXY_IMPORTEXPORT bool
 epoxy_is_desktop_gl(void)
 {
+    return false;
+/*
     const char *es_prefix = "OpenGL ES";
     const char *version;
 
     version = (const char *)glGetString(GL_VERSION);
 
-    /* If we didn't get a version back, there are only two things that
-     * could have happened: either malloc failure (which basically
-     * doesn't exist), or we were called within a glBegin()/glEnd().
-     * Assume the second, which only exists for desktop GL.
-     */
+    // If we didn't get a version back, there are only two things that
+    // could have happened: either malloc failure (which basically
+    // doesn't exist), or we were called within a glBegin()/glEnd().
+    // Assume the second, which only exists for desktop GL.
+    //
     if (!version)
         return true;
 
     return strncmp(es_prefix, version, strlen(es_prefix));
+*/
 }
 
 static int
 epoxy_internal_gl_version(int error_version)
 {
+    (void) error_version;
+    return 20;
+/*
     const char *version = (const char *)glGetString(GL_VERSION);
     GLint major, minor;
     int scanf_count;
@@ -126,11 +132,11 @@ epoxy_internal_gl_version(int error_version)
     if (!version)
         return error_version;
 
-    /* skip to version number */
+    // skip to version number
     while (!isdigit(*version) && *version != '\0')
         version++;
 
-    /* Interpret version number */
+    // Interpret version number
     scanf_count = sscanf(version, "%i.%i", &major, &minor);
     if (scanf_count != 2) {
         fprintf(stderr, "Unable to interpret GL_VERSION string: %s\n",
@@ -138,6 +144,7 @@ epoxy_internal_gl_version(int error_version)
         exit(1);
     }
     return 10 * major + minor;
+*/
 }
 
 

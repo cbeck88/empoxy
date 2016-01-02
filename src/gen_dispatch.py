@@ -637,6 +637,8 @@ class Generator(object):
         self.outln('        fprintf(stderr, "    No known providers.  This is likely a bug "')
         self.outln('                        "in libepoxy code generation\\n");')
         self.outln('    }')
+        self.outln('    fprintf(stderr, "epoxy: is_desktop_gl = %s\\n", (epoxy_is_desktop_gl ? "true" : "false"));')
+        self.outln('    fprintf(stderr, "epoxy: gl_version    = %d\\n", epoxy_gl_version());')
         self.outln('    abort();')
 
         self.outln('}')
