@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/cbeck88/empoxy.svg?branch=master)](http://travis-ci.org/cbeck88/empoxy)
 [![Mit licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./COPYING)
 
-Empoxy is a port of the epoxy library to emscripten.
+Empoxy is a port of the [epoxy library](https://github.com/yaronct/libepoxy) to [emscripten](https://github.com/kripken/emscripten).
 
 Epoxy is a modern and widely used library for OpenGL function pointer management. Epoxy
 provides a "combined" header for various different opengl versions, and resolves
