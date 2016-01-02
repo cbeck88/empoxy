@@ -16,7 +16,12 @@ install:
   - sudo apt-get install python2.7 nodejs default-jre -qq
   - wget https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz
   - tar zxvf emsdk-portable.tar.gz
-  - cd emsdk_portable && ./emsdk update && ./emsdk install latest && ./emsdk activate latest && ls
+  - cd emsdk_portable
+  - ./emsdk update && ./emsdk install -j2 latest && ./emsdk activate latest
+  - ls
+  - source ./emsdk_env.sh
+  - cd ..
+  - ls
 script:
   - mkdir build
   - cd build && emcmake cmake .. && emmake make
