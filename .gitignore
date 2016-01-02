@@ -79,3 +79,5 @@ egl_generated.h
 
 wgl_generated_dispatch.c
 wgl_generated.h
+
+/build

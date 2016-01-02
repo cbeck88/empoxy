@@ -1,9 +1,14 @@
-Empoxy is a port of the epoxy framework to emscripten.
+# Empoxy
 
-Epoxy is a widely used library for OpenGL function pointer management. Epoxy
+[![Build Status](https://travis-ci.org/cbeck88/empoxy.svg?branch=master)](http://travis-ci.org/cbeck88/empoxy)
+[![Mit licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./COPYING)
+
+Empoxy is a port of the epoxy library to emscripten.
+
+Epoxy is a modern and widely used library for OpenGL function pointer management. Epoxy
 provides a "combined" header for various different opengl versions, and resolves
 function name aliases between the different versions for you. It also requires
-no initialization (function pointers are initialized as you use them), and has
+no explicit initialization (function pointers are initialized as you use them), and has
 minimal overhead / startup time.
 
 Besides this, the implementation is much cleaner and simpler -- epoxy's dispatch
@@ -18,3 +23,15 @@ In order to provide emscripten support for Epoxy, we modified the python script
 so that the batch code always requests function pointers from emscripten's
 OpenGL compat layer, rather than from dynamically linked libs. This means that
 we provide exactly the same header file for you to compile with.
+
+# Notes
+
+- Empoxy has been configured to pretend that you have an OpenGL ES version 2.0 context.
+  (Even though glGetString... will report WebGL.)
+- We only provide the `<epoxy/gl.h>` header right now. We could potentially provide `<epoxy/egl.h>` but egl support is not that great in Emscripten atm.
+  Similarly some of the compatibility code for `glBegin`, `glEnd` and various `wgl` functions were not ported.
+- The intended use is to port your working GL ES2 program which uses epoxy
+  to transparently use WebGL instead.  
+  Empoxy defers entirely to emscripten's built-in opengl compatibility layer --
+  if you need full ES2 support, you need to pass to appropriate switch to emscripten,
+  and emscripten will give you errors as usual if it's not configured correctly.
