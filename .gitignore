@@ -81,3 +81,5 @@ wgl_generated_dispatch.c
 wgl_generated.h
 
 /build
+
+*.py~
